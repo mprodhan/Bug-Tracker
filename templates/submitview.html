@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block heading%}
+    Thank you for submitting your ticket request {{request.user}}
+{% endblock %}
+
+{% block body %}
+<a href="/">Home</a>
+<a href="/logout/"><button>Logout</button></a>
+
+<ul>
+    <li><a href="/ticket_create/edit/{{data.id}}/"><button>Edit</button></a></li>
+    <li>Ticket Number: {{data.id}}</li>
+    <li>Ticket Status: {{data.ticket_status}}</li>
+    <li>Issue: {{data.title}}</li>
+    <li>Bug: {{data.bug}}</li>
+    <li>Submitted by: {{data.username}}</li>
+    <li>Date submitted: {{data.created_at}}</li>
+</ul>
+
+{% endblock %}

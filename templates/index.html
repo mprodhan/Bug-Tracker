@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block heading%}Welcome to Bug Tracker {{request.user}}{% endblock %}
+
+{% block body %}
+
+<a href="/logout/" type=Submit value="Logout"><button>Logout</button></a>
+
+<h1>NewTickets</h1>
+
+{% for d in data %}
+    <ul>
+        <p>Ticket Number: {{d.id}}</p>
+        <li>Ticket Status: {{d.ticket_status}}</li>
+        <li>Title: {{d.title}}</li>
+        <li>Bug: {{d.Bug}}</li>
+        <li>Ticket Submitted by: {{d.username}}</li>
+        <li>Assigned by: {{d.assigned_user}}</li>
+        <li>Ticket submitted on: {{d.created_at}}</li>
+        <li>Tickett Completed by: {{d.completed_by}}</li>
+    </ul>
+{% endfor %}
+
+{% endblock %}

@@ -5,17 +5,50 @@
 {% endblock %}
 
 {% block body %}
-<a href="/">Home</a>
-<a href="/logout/"><button>Logout</button></a>
 
-<ul>
-    <li><a href="/ticket_create/edit/{{data.id}}/"><button>Edit</button></a></li>
-    <li>Ticket Number: {{data.id}}</li>
-    <li>Ticket Status: {{data.ticket_status}}</li>
-    <li>Issue: {{data.title}}</li>
-    <li>Bug: {{data.bug}}</li>
-    <li>Submitted by: {{data.username}}</li>
-    <li>Date submitted: {{data.created_at}}</li>
-</ul>
+
+
+<h4>NewTickets</h4>
+{% for d in data %}
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th class="p-3 mb-2 bg-primary text-white" colspan="3">
+                  <strong>Ticket Number:</strong> {{d.id}}
+                  <a href="/ticket_create/edit/{{d.id}}/">
+                    <button type="button" class="btn btn-primary">Edit</button>
+                  </a>
+                  <a href="/profile/{{d.id}}" type=Submit value="Logout">
+                    <button type="button" class="btn btn-primary">Profile</button>
+                  </a>
+                </th>
+            </tr>
+        </thead>
+        
+        <tbody>
+          <tr>
+            <td><strong>Ticket Status:</strong> {{d.ticket_status}}</td>
+            <td><strong>Title:</strong> {{d.title}}</td>
+            <td><strong>Ticket submitted on:</strong> {{d.created_at}}</td>
+          </tr>
+          <tr>
+            <td><strong>Ticket submitted by:</strong> {{d.username}}</td>
+            <td><strong>Assigned by:</strong> {{d.assigned_user}}</td>
+            <td><strong>Ticket completed by:</strong> {{d.completed_by}}</td>
+          </tr>
+          <tr>
+            <td colspan="3"><strong>Issue:</strong> {{d.bug}}</td>
+          </tr>
+        </tbody>
+    </table>
+    <a href="/in_progress/{{d.id}}/"><button type="button" class="btn btn-link">In Progress</button></a>
+    <a href="/done/{{d.id}}/"><button type="button" class="btn btn-link">Done</button></a>
+    <a href="/invalid/{{d.id}}/"><button type="button" class="btn btn-link">Invalid</button></a>
+
+
+{% endfor %}
+<br>
+<br>
 
 {% endblock %}

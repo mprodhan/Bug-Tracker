@@ -1,6 +1,18 @@
-<h1>Bug Tracker</h1>
-<form action = "" method = "POST">
-    {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit"value="Submit!">
-</form>
+{% extends "base.html" %}
+
+{% block body %}
+    {% if not user.is_authenticate %}
+        <h3>Please log in to submit a ticket!</h3>
+        <form action = "" method = "POST">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit"value="Submit!">
+        </form>
+
+        <br>
+        <h4>Don't have username please be sure to sign up with us.</h4>
+        <a href="/signup/" type=Submit value="Sign Up"><button>Sign Up</button></a>
+
+    {% endif %}
+
+{% endblock %}

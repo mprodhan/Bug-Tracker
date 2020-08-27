@@ -1,24 +1,174 @@
 {% extends "base.html" %}
-
+<br>
 {% block heading%}Welcome to Bug Tracker {{request.user}}{% endblock %}
 
 {% block body %}
 
-<a href="/logout/" type=Submit value="Logout"><button>Logout</button></a>
+    <h4>NewTickets</h4>
+            {% for d in data %}
 
-<h1>NewTickets</h1>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th class="p-3 mb-2 bg-primary text-white" colspan="3">
+                              <strong>Ticket Number:</strong> {{d.id}}
+                              <a href="/ticket_create/edit/{{d.id}}/">
+                                <button type="button" class="btn btn-primary">Edit</button>
+                              </a>
+                              <a href="/profile/{{d.id}}" type=Submit value="Logout">
+                                <button type="button" class="btn btn-primary">Profile</button>
+                              </a>
+                            </th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                      <tr>
+                        <td><strong>Ticket Status:</strong> {{d.ticket_status}}</td>
+                        <td><strong>Title:</strong> {{d.title}}</td>
+                        <td><strong>Ticket submitted on:</strong> {{d.created_at}}</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Ticket submitted by:</strong> {{d.username}}</td>
+                        <td><strong>Assigned by:</strong> {{d.assigned_user}}</td>
+                        <td><strong>Ticket completed by:</strong> {{d.completed_by}}</td>
+                      </tr>
+                      <tr>
+                        <td colspan="3"><strong>Issue:</strong> {{d.bug}}</td>
+                      </tr>
+                    </tbody>
+                </table>
+                <a href="/in_progress/{{d.id}}/"><button type="button" class="btn btn-link">In Progress</button></a>
+                <a href="/done/{{d.id}}/"><button type="button" class="btn btn-link">Done</button></a>
+                <a href="/invalid/{{d.id}}/"><button type="button" class="btn btn-link">Invalid</button></a>
 
-{% for d in data %}
-    <ul>
-        <p>Ticket Number: {{d.id}}</p>
-        <li>Ticket Status: {{d.ticket_status}}</li>
-        <li>Title: {{d.title}}</li>
-        <li>Bug: {{d.Bug}}</li>
-        <li>Ticket Submitted by: {{d.username}}</li>
-        <li>Assigned by: {{d.assigned_user}}</li>
-        <li>Ticket submitted on: {{d.created_at}}</li>
-        <li>Tickett Completed by: {{d.completed_by}}</li>
-    </ul>
-{% endfor %}
+            
+            {% endfor %}
+            <br>
+            <br>
+
+    <h4>In Progress</h4>
+        {% for d in assigned %}
+        
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th class="p-3 mb-2 bg-success text-white" colspan="3">
+                      <strong>Ticket Number:</strong> {{d.id}}
+                      <a href="/ticket_create/edit/{{d.id}}/">
+                        <button type="button" class="btn btn-success">Edit</button>
+                      </a>
+                      <a href="/profile/{{d.id}}" type=Submit value="Logout">
+                        <button type="button" class="btn btn-success">Profile</button>
+                    </a>
+                    </th>
+                </tr>
+            </thead>
+            
+            <tbody>
+              <tr>
+                <td><strong>Ticket Status:</strong> {{d.ticket_status}}</td>
+                <td><strong>Title:</strong> {{d.title}}</td>
+                <td><strong>Ticket submitted on:</strong> {{d.created_at}}</td>
+              </tr>
+              <tr>
+                <td><strong>Ticket submitted by:</strong> {{d.username}}</td>
+                <td><strong>Assigned by:</strong> {{d.assigned_user}}</td>
+                <td><strong>Ticket completed by:</strong> {{d.completed_by}}</td>
+              </tr>
+              <tr>
+                <td colspan="3"><strong>Issue:</strong> {{d.bug}}</td>
+              </tr>
+            </tbody>
+        </table>
+        <a href="/in_progress/{{d.id}}/"><button type="button" class="btn btn-link">In Progress</button></a>
+        <a href="/done/{{d.id}}/"><button type="button" class="btn btn-link">Done</button></a>
+        <a href="/invalid/{{d.id}}/"><button type="button" class="btn btn-link">Invalid</button></a>
+
+        {% endfor %}
+        <br>
+        <br>
+
+    <h4>Completed</h4>
+            {% for d in done %}
+            
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                    <th class="p-3 mb-2 bg-secondary text-white" colspan="3">
+                      <strong>Ticket Number:</strong> {{d.id}}
+                      <a href="/ticket_create/edit/{{d.id}}/">
+                        <button type="button" class="btn btn-secondary">Edit</button>
+                      </a>
+                      <a href="/profile/{{d.id}}" type=Submit value="Logout">
+                        <button type="button" class="btn btn-secondary">Profile</button>
+                      </a>
+                    </th>
+                  </tr>
+                </thead>
+                
+                <tbody>
+                  <tr>
+                    <td><strong>Ticket Status:</strong> {{d.ticket_status}}</td>
+                    <td><strong>Title:</strong> {{d.title}}</td>
+                    <td><strong>Ticket submitted on:</strong> {{d.created_at}}</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Ticket submitted by:</strong> {{d.username}}</td>
+                    <td><strong>Assigned by:</strong> {{d.assigned_user}}</td>
+                    <td><strong>Ticket completed by:</strong> {{d.completed_by}}</td>
+                  </tr>
+                  <tr>
+                    <td colspan="3"><strong>Issue:</strong> {{d.bug}}</td>
+                  </tr>
+                </tbody>
+            </table>
+            <a href="/in_progress/{{d.id}}/"><button type="button" class="btn btn-link">In Progress</button></a>
+            <a href="/done/{{d.id}}/"><button type="button" class="btn btn-link">Done</button></a>
+            <a href="/invalid/{{d.id}}/"><button type="button" class="btn btn-link">Invalid</button></a>
+            
+            {% endfor %}
+            <br>
+            <br>
+
+    <h4>Invalid</h4>
+        {% for d in invalid %}
+    
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th class="p-3 mb-2 bg-danger text-white" colspan="3"><strong>Ticket Number:</strong> {{d.id}}
+                          <a href="/ticket_create/edit/{{d.id}}/">
+                            <button type="button" class="btn btn-danger">Edit</button>
+                          </a>
+                          <a href="/profile/{{d.id}}" type=Submit value="Logout">
+                            <button type="button" class="btn btn-danger">Profile</button>
+                          </a>
+                        </th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    <tr>
+                    <td><strong>Ticket Status:</strong> {{d.ticket_status}}</td>
+                    <td><strong>Title:</strong> {{d.title}}</td>
+                    <td><strong>Ticket submitted on:</strong> {{d.created_at}}</td>
+                    </tr>
+                    <tr>
+                    <td><strong>Ticket submitted by:</strong> {{d.username}}</td>
+                    <td><strong>Assigned by:</strong> {{d.assigned_user}}</td>
+                    <td><strong>Ticket completed by:</strong> {{d.completed_by}}</td>
+                    </tr>
+                    <tr>
+                    <td colspan="3"><strong>Issue:</strong> {{d.bug}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <a href="/in_progress/{{d.id}}/"><button type="button" class="btn btn-link">In Progress</button></a>
+            <a href="/done/{{d.id}}/"><button type="button" class="btn btn-link">Done</button></a>
+            <a href="/invalid/{{d.id}}/"><button type="button" class="btn btn-link">Invalid</button></a>
+    
+        {% endfor %}
+
 
 {% endblock %}

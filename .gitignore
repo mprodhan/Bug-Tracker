@@ -22,7 +22,6 @@
 *.pot
 *.pyc
 __pycache__/
-poetry.lock
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
@@ -257,5 +256,7 @@ fabric.properties
 # See https://youtrack.jetbrains.com/issue/JBR-2257
 .idea/$CACHE_FILE$
 
+
+poetry.lock
 # End of https://www.toptal.com/developers/gitignore/api/django,pycharm
 
